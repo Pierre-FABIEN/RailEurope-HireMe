@@ -4,7 +4,7 @@
 
 	import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-	import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'; // Importation de DRACOLoader
+	import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
 	import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib';
 	import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';

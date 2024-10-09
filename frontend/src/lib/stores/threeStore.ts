@@ -6,7 +6,7 @@ import { animationService } from '$UITools/threeServices/AnimationService';
 import { cameraService } from '$UITools/threeServices/CameraService';
 import { eventService } from '$UITools/threeServices/EventService';
 import { helperService } from '$UITools/threeServices/HelperService';
-import { loaderService } from '$UITools/threeServices/LoaderService';
+
 import { renderService } from '$UITools/threeServices/RenderService';
 import { sceneService } from '$UITools/threeServices/SceneService';
 
@@ -21,7 +21,7 @@ function createThreeStore() {
     animationService,
     eventService,
     helperService,
-    loaderService,
+    
     renderService,
   });
 
@@ -55,7 +55,7 @@ function createThreeStore() {
         animationService,
         eventService,
         helperService,
-        loaderService,
+        
         renderService,
       });
 
@@ -88,7 +88,7 @@ function createThreeStore() {
           animationService,
           eventService,
           helperService,
-          loaderService,
+          
           renderService,
         };
       });

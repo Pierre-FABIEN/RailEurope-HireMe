@@ -1,7 +1,6 @@
 .home {
     @include ccc;
     width: 100%;
-    min-height: 100%;
     position: absolute;
     
     .home-visage {
@@ -10,6 +9,11 @@
         right: 0;
         height: 100vh;
     }
+
+    .firstPage, .secondPage, .thirdPage {
+        width: 100%;
+        height: 100vh;
+      }
 
     .logo-container {
         @include ccc;

@@ -1,0 +1,17 @@
+{
+  "name": "boilerplatesveltekit",
+  "version": "1.0.0",
+  "description": "Boilerplate Sveltekit NodeJs MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm --prefix ./frontend run dev",
+    "build": "npm --prefix ./frontend run build",
+    "test": "npm --prefix ./frontend run test",
+    "in": "cd ./frontend && npm i"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

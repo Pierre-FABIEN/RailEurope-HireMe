@@ -1,0 +1,298 @@
+/* Variables and mixins declared here will be available in all other SCSS files */
+//C:\wamp64\www\BoilerPlateSvelteKit\src\CSS\utils\_variables.scss
+@import "./src/styles/utils/variables";
+@import "./src/styles/utils/functions";
+@import "./src/styles/utils/breackpoints";
+@import "./src/styles/utils/flex";
+@import "./src/styles/utils/mixins";
+@import "./src/styles/utils/vendors";
+
+@import './src/styles/shared/BorderAnimation';
+
+@import "./src/styles/base/fonts";
+@import "./src/styles/base/reset";
+@import "./src/styles/base/normalize";
+
+//@import "./src/styles/shared/card";
+
+@import "./base/darkMode";
+
+@import "./components/header";
+@import "./components/items";
+
+// @import './shared/links';
+// @import './shared/sections';Nous allons intégrer
+// @import './shared/cursor';
+
+// @import './UITools/canvas';
+// @import './UITools/functionals';
+//@import './UITools/navigation';
+//@import './UITools/preloader';
+
+@import './pages/home';
+// @import './pages/about';
+@import './src/styles/pages/page';
+@import './src/styles/base/opensans/open-sans';
+
+@import './src/styles/components/grids';
+@import './src/styles/components/lines';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden !important;
+  font-family: 'Lato', sans-serif;
+  transform-style: preserve-3d;
+  image-rendering: smooth;
+
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden
+}
+
+
+.scroll-content {
+  min-height: 100vh;
+}
+
+.initalLoader {
+  @include rcc;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 200;
+  width: 100vw;
+  height: 100vh;
+  font-size: 11vw;
+  color: $color-text;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  position: relative;
+  overflow: hidden //cursor: none;
+}
+
+#Cursor {
+  svg {
+    @include ccc;
+    position: absolute;
+    transform-origin: center;
+
+    path {
+      max-width: 50px;
+      max-height: 50px;
+      transform: translate(25%, 25%);
+    }
+  }
+}
+
+.notification-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 101;
+}
+
+#smoothScoller {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  .pageTransition {
+    main {
+      overflow: hidden;
+      width: 100%;
+      min-height: 100vh;
+      padding-top: 70px;
+    }
+  }
+}
+
+
+// Base title styles
+.title,
+.subtitle,
+.title-bold {
+  margin-right: auto;
+  margin-left: auto;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: $color-text;
+}
+
+.title {
+  margin-top: 70px;
+  margin-bottom: 15px;
+  font-size: 75px;
+  text-align: justify;
+  width: 1300px;
+}
+
+.subtitle {
+  width: 1300px;
+  font-size: 35px;
+  color: $titleColor;
+  font-weight: 500;
+}
+
+.title-bold {
+  margin-bottom: 20px;
+  margin-left: 0;
+  line-height: 35px;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  font-size: 34px;
+  font-weight: 900;
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    box-sizing: content-box;
+    background-color: $color-text;
+    transform: rotate(-1.5deg);
+  }
+}
+
+.handleClass {
+  outline: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.portfolio-second {
+  .a {
+    @include ccc;
+
+    h2 {
+      font-size: 100px;
+      text-align: center;
+      font-weight: 100;
+      margin: 0;
+      color: $titleColor !important;
+      text-transform: uppercase;
+    }
+  }
+
+  .b {
+    h2 {
+      font-size: 40px;
+      margin-top: 0;
+    }
+  }
+
+  .c {
+    h2 {
+      font-size: 40px;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+  }
+
+  article {
+    &:hover {
+      background-color: $whiteBackground;
+    }
+  }
+}
+
+.portfolio-fifth {
+  width: 100%;
+  h3 {
+    font-size: 60px;
+  }
+}
+
+.portfolio-fourth {
+  h2 {
+    font-size: 60px;
+  }
+}
+
+.title.axo {
+  text-align: center;
+
+  span {
+    color: $titleColor;
+  }
+}
+
+.paragraph-custom {
+  max-width: 1000px;
+  width: 80vw;
+  font-size: 18px;
+  color: $color-text;
+  font-family: "Open Sans";
+  font-weight: 400;
+  text-align: justify;
+  line-height: 150%;
+  text-align-last: left;
+  margin: 15px 0px;
+
+  b {
+    color: $titleColor;
+  }
+
+  a {
+    color: $titleColor2;
+    text-decoration: none;
+    font-weight: 700;
+  }
+}
+
+.lighthouse {
+  max-width: 800px;
+  width: 80vw;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.containerSlider {
+  	li {
+		width: auto !important;
+	}
+
+  	img {
+		width: auto !important;
+		max-height: 500px;
+    border-radius: 15px;
+	}
+}
+
+.containerText {
+  border-radius: 15px;
+  margin: 15px;
+}

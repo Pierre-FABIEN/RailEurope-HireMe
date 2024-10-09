@@ -4,6 +4,7 @@
 
 	import App from '$lib/js/index';
 	import { registerServiceWorker } from '$UITools/serviceWorker';
+	import Header from '$components/Header.svelte';
 
 	import Loader from '$UITools/InitialLoader/index.svelte';
 	import SmoothScroller from '$UITools/SmoothScroller/index.svelte';
@@ -14,7 +15,6 @@
 		setFirstOpen,
 		setRessourceToValide
 	} from '$lib/stores/initialLoaderStore';
-	import Canvas3D from '../lib/components/Canvas3D.svelte';
 
 	onNavigate(async (navigation) => {
 		if (!document.startViewTransition) return;
@@ -77,7 +77,7 @@
 	<Loader />
 {/if}
 
-<Canvas3D />
+
 
 <SmoothScroller>
 	<main>

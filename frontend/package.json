@@ -3,9 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "concurrently \"vite dev\" \"npm run prettier:watch\"",
-    "prettier:watch": "chokidar \"src/**/*.{js,ts,svelte,scss}\" -c \"npm run prettier:single -- {path}\"",
-    "prettier:single": "prettier --write",
-    "prettier": "prettier --write \"src/**/*.{js,ts,svelte,scss}\"",
+    "prettier:watch": "chokidar '**/*.js' '**/*.ts' '**/*.svelte' '**/*.scss' --command 'npm run prettier -- {path}'",
+    "prettier": "prettier --write",
     "build": "vite build",
     "preview": "vite preview",
     "test": "playwright test",
@@ -45,6 +44,8 @@
   },
   "type": "module",
   "dependencies": {
+    "@splidejs/splide-extension-auto-scroll": "^0.5.3",
+    "@splidejs/svelte-splide": "^0.2.9",
     "@sveltejs/vite-plugin-svelte": "*",
     "@tsconfig/svelte": "*",
     "@tweakpane/core": "^1.1.0",

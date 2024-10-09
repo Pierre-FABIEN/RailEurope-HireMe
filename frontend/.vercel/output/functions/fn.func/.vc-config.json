@@ -1,10 +1,6 @@
 {
 	"runtime": "nodejs20.x",
-	"handler": "..\\..\\..\\..\\Web\\RailEurope-HireMe\\frontend\\.svelte-kit\\vercel-tmp\\index.js",
+	"handler": "..\\..\\..\\..\\Web\\PortFolio\\frontend\\.svelte-kit\\vercel-tmp\\index.js",
 	"launcherType": "Nodejs",
-	"experimentalResponseStreaming": true,
-	"framework": {
-		"slug": "sveltekit",
-		"version": "2.6.4"
-	}
+	"experimentalResponseStreaming": true
 }

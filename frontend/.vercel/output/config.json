@@ -2,6 +2,39 @@
 	"version": 3,
 	"routes": [
 		{
+			"src": "/about",
+			"dest": "/about/"
+		},
+		{
+			"src": "/about/",
+			"status": 308,
+			"headers": {
+				"Location": "/about"
+			}
+		},
+		{
+			"src": "/transitionAPI",
+			"dest": "/transitionAPI/"
+		},
+		{
+			"src": "/transitionAPI/",
+			"status": 308,
+			"headers": {
+				"Location": "/transitionAPI"
+			}
+		},
+		{
+			"src": "/transitionAPI/cible",
+			"dest": "/transitionAPI/cible/"
+		},
+		{
+			"src": "/transitionAPI/cible/",
+			"status": 308,
+			"headers": {
+				"Location": "/transitionAPI/cible"
+			}
+		},
+		{
 			"src": "/_app/immutable/.+",
 			"headers": {
 				"cache-control": "public, immutable, max-age=31536000"
@@ -15,5 +48,18 @@
 			"dest": "/fn"
 		}
 	],
-	"overrides": {}
+	"overrides": {
+		"index.html": {
+			"path": ""
+		},
+		"about.html": {
+			"path": "about"
+		},
+		"transitionAPI.html": {
+			"path": "transitionAPI"
+		},
+		"transitionAPI/cible.html": {
+			"path": "transitionAPI/cible"
+		}
+	}
 }

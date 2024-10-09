@@ -4,7 +4,6 @@
 
 	import App from '$lib/js/index';
 	import { registerServiceWorker } from '$UITools/serviceWorker';
-	import Header from '$components/Header.svelte';
 
 	import Loader from '$UITools/InitialLoader/index.svelte';
 	import SmoothScroller from '$UITools/SmoothScroller/index.svelte';

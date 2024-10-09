@@ -2,7 +2,6 @@
 	import { threeStore } from '$stores/threeStore';
 	import { onMount } from 'svelte';
 	import * as THREE from 'three';
-	import { tick } from 'svelte';
 
 	import { setTransitionLoader } from '$lib/stores/transitionLoaderStore';
 
@@ -12,12 +11,11 @@
 	gsap.registerPlugin(ScrollTrigger);
 
 	import { get } from 'svelte/store';
-	import { linear } from 'svelte/easing';
+
 
 	let container: HTMLElement;
 
 	onMount(async () => {
-		await tick(); // Assurez-vous que le DOM est prêt
 		setTransitionLoader(false);
 
 		const { camera } = get(threeStore);
@@ -48,7 +46,7 @@
 						y: 15,
 						z: 0,
 						duration: 1,
-						ease: linear
+						ease: "none"
 					});
 
 					cameraTimeline.to(camera.position, {
@@ -56,7 +54,7 @@
 						y: 10,
 						z: 0,
 						duration: 1,
-						ease: linear
+						ease: "none"
 					});
 
 					cameraTimeline.to(camera.position, {
@@ -64,7 +62,7 @@
 						y: 5,
 						z: 8,
 						duration: 1,
-						ease: linear
+						ease: "none"
 					});
 
 					cameraTimeline.to(camera.position, {
@@ -72,7 +70,7 @@
 						y: 3,
 						z: 8,
 						duration: 1,
-						ease: linear
+						ease: "none"
 					});
 				}, 1000);
 			});
@@ -104,31 +102,3 @@
 		</h1>
 	</div>
 </div>
-
-<style>
-	.firstPage,
-	.secondPage,
-	.thirdPage,
-	.fourthPage {
-		width: 100%;
-		height: 100vh;
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-	}
-
-	h1,
-	p {
-		color: #eb0055;
-	}
-
-	h1 {
-		font-size: xx-large;
-	}
-
-	.fourthPage > h1 {
-		margin-right: 45vw;
-	}
-</style>

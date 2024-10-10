@@ -89,23 +89,65 @@
 
 <div class="home" bind:this={container}>
 	<div class="firstPage">
-		<h1>After more than a year of <br /> high-speed travel on SvelteKit</h1>
+		<div class="textContent">
+			<h1>After more than a year of <br /> hard work on sveltekit</h1>
+			<p>
+				After all these tools crafted with Svelte to provide the finest browser experiences. After
+				all the research to adopt the best practices and technologies surrounding SvelteKit. After
+				all these CRUDs, forms, APIs, and even WebSocket and GraphQL implementations, exploring the
+				most intriguing and, above all, useful solutions! After undergoing a test with the Americans
+				that broadened my understanding of a SvelteKit SaaS. After all this passionate yet
+				exhausting work on building a boilerplate e-commerce and SaaS platform for just €10 per
+				year, designed for around 10 to 30 thousand visitors per month. It’s not over yet! Rail
+				Europe has announced a position for a Frontend Engineer specializing in SvelteKit!
+			</p>
+		</div>
 	</div>
 
 	<div class="secondPage">
-		<h1>It's time to settle down</h1>
+		<h1>It's time to take my<br /> place on this train</h1>
+		<p>
+			I hold all the passports in hand: WCAG, a11y, and a solid background in React. I bring with me
+			the ability to tackle complex problems, along with an unwavering passion for learning and
+			growing. The excitement of starting a greenfield project is palpable, and deep down, I am
+			eager to share everything I’ve learned with those interested in SvelteKit, while continuing to
+			learn myself. With experience in both aesthetic and technical fields, I’m requesting a ticket
+			on this train to embark on a new adventure.
+		</p>
 	</div>
 
 	<div class="thirdPage"></div>
 
 	<div class="fourthPage">
-		<h1>
-			And enjoy all these achievements<br /> to share them with the world,<br /> with Rail Europe!
-		</h1>
+		<h1>My GitHub projects that will<br /> showcase my experience:</h1>
+		<ul>
+			<li>
+				<p>
+					Ecommerce & SaaS boilerplate: svelte 4, Sveltekit, Tailwind, Shadcn, Superform, Zod,
+					Prisma, Vercel, MongoDB, Cloundinary, 0Auth, Stripe, PWA, ThreeJs, Sitemap, ...
+				</p>
+				<a href="https://github.com/Pierre-FABIEN/E-com_Sveltekit-0Auth-Vercel-MongoDB">Link</a>
+			</li>
+			<li>
+				<p>
+					Technical Test Sofware Engineering: Svelte 5, Sveltekit, Tailwind, Shadcn, Superform, Zod,
+					Prisma, Vercel, MongoDB
+				</p>
+				<a href="https://github.com/Pierre-FABIEN/TEST">Link</a>
+			</li>
+			<li>
+				<p>BoilerPlate sveltekit GraphQL NodeJs and mongoDB Playwright</p>
+				<a href="https://github.com/Pierre-FABIEN/Sveltekit-GraphQL-NodeJS-MongoDB">Link</a>
+			</li>
+			<li>
+				<p>BoilerPlate sveltekit APIRestful NodeJs and mongoDB Playwright</p>
+				<a href="https://github.com/Pierre-FABIEN/APIRestFul-Sveltekit-NodeJS-MongoDB">Link</a>
+			</li>
+		</ul>
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	.firstPage,
 	.secondPage,
 	.thirdPage,
@@ -130,5 +172,33 @@
 
 	.fourthPage > h1 {
 		margin-right: 45vw;
+	}
+
+	.firstPage {
+		p {
+			width: 600px;
+			font-weight: 200;
+			text-align: justify;
+			color: white;
+			font-size: 16px;
+			line-height: 150%;
+		}
+	}
+
+	.secondPage {
+		p {
+			width: 300px;
+			font-weight: 200;
+			text-align: justify;
+			color: white;
+			font-size: 16px;
+			line-height: 150%;
+		}
+	}
+
+	h1,
+	p {
+		font-family: 'Georama', sans-serif;
+		font-weight: 700;
 	}
 </style>

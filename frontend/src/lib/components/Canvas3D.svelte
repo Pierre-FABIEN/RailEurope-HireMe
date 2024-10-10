@@ -4,7 +4,7 @@
 
 	import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-	import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'; // Importation de DRACOLoader
+	import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
 	import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib';
 	import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
@@ -25,9 +25,18 @@
 			threeStore.initialize();
 
 			unsubscribe = threeStore.subscribe(($state) => {
-				({ renderer, camera, scene } = $state);
+				({ camera } = $state);
 
-				if (renderer && container && !container.firstChild) {
+				if (container && !container.firstChild) {
+					scene = new THREE.Scene();
+
+					renderer = new THREE.WebGLRenderer({ antialias: true });
+					renderer.setSize(window.innerWidth, window.innerHeight);
+					renderer.setPixelRatio(window.devicePixelRatio * devicePixelRatio);
+					renderer.shadowMap.enabled = true;
+					renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+					container.appendChild(renderer.domElement);
+
 					container.appendChild(renderer.domElement);
 
 					// Camera setup (only if camera is not already set up)

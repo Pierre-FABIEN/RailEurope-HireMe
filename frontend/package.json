@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "concurrently \"vite dev\" \"npm run prettier:watch\"",
-    "prettier:watch": "chokidar '**/*.js' '**/*.ts' '**/*.svelte' '**/*.scss' --command 'npm run prettier -- {path}'",
-    "prettier": "prettier --write",
+    "prettier:watch": "chokidar \"src/**/*.{js,ts,svelte,scss}\" -c \"npm run prettier:single -- {path}\"",
+    "prettier:single": "prettier --write",
+    "prettier": "prettier --write \"src/**/*.{js,ts,svelte,scss}\"",
     "build": "vite build",
     "preview": "vite preview",
     "test": "playwright test",

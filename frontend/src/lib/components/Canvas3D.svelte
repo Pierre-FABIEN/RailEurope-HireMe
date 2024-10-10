@@ -1,135 +1,117 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import * as THREE from 'three';
+
 	import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 	import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'; // Importation de DRACOLoader
 
-    import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib';
-import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
+	import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib';
+	import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
 
+	import { threeStore } from '$stores/threeStore';
 
-	let container: HTMLElement;
-	let scene: THREE.Scene;
-	let renderer: THREE.WebGLRenderer;
-	let camera: THREE.PerspectiveCamera;
-	let controls: OrbitControls;
-	let animationFrameId: number;
+	let controls;
+	let container;
+	let animationFrameId;
+	let unsubscribe;
 
-	// Initial setup for device pixel ratio
-	const devicePixelRatio = 1.3;
+	let scene;
+	let renderer;
+	let camera;
 
-	// On component mount, setup scene, camera, renderer, and load the GLTF model
 	onMount(() => {
 		if (typeof window !== 'undefined') {
-			// Scene setup
-			scene = new THREE.Scene();
+			threeStore.initialize();
 
-			// Camera setup
-			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-			camera.position.set(15, 3, 0);
+			unsubscribe = threeStore.subscribe(($state) => {
+				({ renderer, camera, scene } = $state);
 
-			// Renderer setup
-			renderer = new THREE.WebGLRenderer({ antialias: true });
-			renderer.setSize(window.innerWidth, window.innerHeight);
-			renderer.setPixelRatio(window.devicePixelRatio * devicePixelRatio);
-			renderer.shadowMap.enabled = true;
-			renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-			container.appendChild(renderer.domElement);
-            
+				if (renderer && container && !container.firstChild) {
+					container.appendChild(renderer.domElement);
 
-            // Initialiser RectAreaLightUniformsLib pour permettre l'utilisation des lumières rectangulaires
-            RectAreaLightUniformsLib.init();
+					// Camera setup (only if camera is not already set up)
+					camera.position.set(10, 13, 0);
 
-            // Création d'une lumière rectangulaire
-            const rectLightLeft = new THREE.RectAreaLight(0xffffff, 2, 10, 10);  // Largeur 4, Hauteur 4
-            rectLightLeft.position.set(0, 5, 8);  // Position de la lumière
-            rectLightLeft.lookAt(5, 5, 0);         // Diriger la lumière vers le centre de la scène
+					// Orbit controls for interaction
+					controls = new OrbitControls(camera, renderer.domElement);
+					controls.enableDamping = true;
+					controls.dampingFactor = 0.1;
+					controls.target.set(-20, 0, 0);
 
-            // Ajouter la lumière à la scène
-            scene.add(rectLightLeft);
+					// Initialize RectAreaLightUniformsLib
+					RectAreaLightUniformsLib.init();
 
-            const rectLightLeftHelper = new RectAreaLightHelper(rectLightLeft);
-            scene.add(rectLightLeftHelper);
+					// Add lights to the scene
+					addLights(scene);
 
-            // Création d'une lumière rectangulaire
-            const rectLightRight = new THREE.RectAreaLight(0xffffff, 2, 10, 10);  // Largeur 4, Hauteur 4
-            rectLightRight.position.set(0, 5, -8);  // Position de la lumière
-            rectLightRight.lookAt(5, 5, 0);         // Diriger la lumière vers le centre de la scène
+					// Load GLTF model
+					loadModel(scene);
 
-            // Ajouter la lumière à la scène
-            scene.add(rectLightRight);
+					// Resize handling
+					window.addEventListener('resize', onWindowResize);
 
-            const rectLightRightHelper = new RectAreaLightHelper(rectLightRight);
-            scene.add(rectLightRightHelper);
-
-
-
-            const rectLightPhareRight = new THREE.RectAreaLight(0xffffff, 1000, .2, .15);  // Largeur 4, Hauteur 4
-            rectLightPhareRight.position.set(10.89, 1.68, 1.3);  // Position de la lumière
-            rectLightPhareRight.rotation.y = 80;      // Diriger la lumière vers le centre de la scène
-
-            // Ajouter la lumière à la scène
-            scene.add(rectLightPhareRight);
-
-            const rectLightPhareRightHelper = new RectAreaLightHelper(rectLightPhareRight);
-            scene.add(rectLightPhareRightHelper);
-
-
-            const rectLightPhareLeft = new THREE.RectAreaLight(0xffffff, 1000, .2, .15);  // Largeur 4, Hauteur 4
-            rectLightPhareLeft.position.set(10.89, 1.68, -1.3);  // Position de la lumière
-            rectLightPhareLeft.rotation.y = 80;      // Diriger la lumière vers le centre de la scène
-
-            // Ajouter la lumière à la scène
-            scene.add(rectLightPhareLeft);
-
-            const rectLightPhareLeftHelper = new RectAreaLightHelper(rectLightPhareLeft);
-            scene.add(rectLightPhareLeftHelper);
-
-
-
-
-
-
-
-			// Orbit controls for interaction
-			controls = new OrbitControls(camera, renderer.domElement);
-			controls.enableDamping = true;
-            // controls.enableZoom = false;
-            // controls.enablePan = false;
-            // controls.autoRotate = false;
-            // controls.enabled = false;
-
-			// Load GLTF model with DRACO loader
-			const loader = new GLTFLoader();
-			const dracoLoader = new DRACOLoader();
-			dracoLoader.setDecoderPath('/draco/'); // Chemin vers le décodeur Draco
-			loader.setDRACOLoader(dracoLoader);
-
-            loader.load(
-                'modeles/train.glb',
-                (gltf: any) => {
-                    gltf.scene.traverse((node: any) => {
-                        if (node.isMesh) {
-                            node.castShadow = true;
-                            node.receiveShadow = true;
-                            // Vérifier et recalculer les normales
-                            node.geometry.computeVertexNormals(); 
-                        }
-                    });
-                    scene.add(gltf.scene);
-                    animate();
-                },
-                undefined,
-                (error: any) => {
-                    console.error('Erreur lors du chargement du modèle GLTF :', error);
-                }
-            );
-
-			// Resize handling
-			window.addEventListener('resize', onWindowResize);
+					// Start animation loop
+					animate();
+				}
+			});
 		}
 	});
+
+	function addLights(scene) {
+		// Création des lumières
+		const rectLightLeft = new THREE.RectAreaLight(0xffffff, 2, 10, 10);
+		rectLightLeft.position.set(0, 6, 8);
+		rectLightLeft.lookAt(5, 5, 0);
+		scene.add(rectLightLeft);
+		scene.add(new RectAreaLightHelper(rectLightLeft));
+
+		const rectLightRight = new THREE.RectAreaLight(0xffffff, 2, 10, 10);
+		rectLightRight.position.set(0, 6, -8);
+		rectLightRight.lookAt(5, 5, 0);
+		scene.add(rectLightRight);
+		scene.add(new RectAreaLightHelper(rectLightRight));
+
+		const rectLightPhareRight = new THREE.RectAreaLight(0xffffff, 1000, 0.24, 0.15);
+		rectLightPhareRight.position.set(10.887, 1.666, 1.287);
+		rectLightPhareRight.name = 'rectLightPhareRight';
+		rectLightPhareRight.rotation.y = 80.1;
+		scene.add(rectLightPhareRight);
+		scene.add(new RectAreaLightHelper(rectLightPhareRight));
+
+		const rectLightPhareLeft = new THREE.RectAreaLight(0xffffff, 1000, 0.24, 0.15);
+		rectLightPhareLeft.position.set(10.887, 1.666, -1.287);
+		rectLightPhareLeft.name = 'rectLightPhareLeft';
+		rectLightPhareLeft.rotation.y = 80.1;
+		scene.add(rectLightPhareLeft);
+		scene.add(new RectAreaLightHelper(rectLightPhareLeft));
+	}
+
+	function loadModel(scene) {
+		const loader = new GLTFLoader();
+		const dracoLoader = new DRACOLoader();
+		dracoLoader.setDecoderPath('/draco/');
+		loader.setDRACOLoader(dracoLoader);
+
+		loader.load(
+			'modeles/train.glb',
+			(gltf: any) => {
+				gltf.scene.traverse((node: any) => {
+					if (node.isMesh) {
+						node.castShadow = true;
+						node.receiveShadow = true;
+						node.geometry.computeVertexNormals();
+					}
+				});
+				scene.add(gltf.scene);
+				console.log(scene);
+			},
+			undefined,
+			(error: any) => {
+				console.error('Erreur lors du chargement du modèle GLTF :', error);
+			}
+		);
+	}
 
 	// Animation loop
 	const animate = () => {
@@ -154,25 +136,24 @@ import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHel
 			window.removeEventListener('resize', onWindowResize);
 		}
 
-		// Vérification avant le nettoyage
 		if (renderer) renderer.dispose();
 		if (controls) controls.dispose();
+		if (unsubscribe) unsubscribe();
+
+		// Dispose threeStore resources
+		threeStore.dispose();
 	});
 </script>
 
-<!-- Container for the Three.js renderer -->
 <div bind:this={container}></div>
 
 <style>
 	div {
 		width: 100vw;
 		height: 100vh;
-		display: block;
-        position: absolute;
-	}
-
-	body {
-		margin: 0;
-		overflow: hidden;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: -1;
 	}
 </style>

@@ -92,4 +92,19 @@
 	.letter {
 		opacity: 0;
 	}
+
+	.initalLoader {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 200;
+		width: 100vw;
+		height: 100vh;
+		font-size: 11vw;
+		color: white;
+	}
 </style>

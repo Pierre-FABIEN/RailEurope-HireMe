@@ -148,6 +148,15 @@
 </div>
 
 <style lang="scss">
+	.home {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		width: 100%;
+		position: absolute;
+	}
+
 	.firstPage,
 	.secondPage,
 	.thirdPage,

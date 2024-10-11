@@ -105,6 +105,7 @@
 		width: 100vw;
 		height: 100vh;
 		font-size: 11vw;
-		color: white;
+		color: #eb0055;
+		background: black;
 	}
 </style>

@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import { onNavigate } from '$app/navigation';
 
-	import App from '$lib/js/index';
 	import { registerServiceWorker } from '$UITools/serviceWorker';
 
 	import Loader from '$UITools/InitialLoader/index.svelte';
@@ -15,7 +14,7 @@
 		setRessourceToValide
 	} from '$lib/stores/initialLoaderStore';
 
-	import Canvas3D from '../lib/components/Canvas3D.svelte';
+	import Canvas3D from '$components/Canvas3D.svelte';
 
 	onNavigate(async (navigation) => {
 		if (!document.startViewTransition) return;
@@ -30,7 +29,6 @@
 	});
 
 	onMount(async () => {
-		new App();
 		registerServiceWorker();
 		setFirstOpen(true);
 		setRessourceToValide(true);

@@ -1,20 +1,20 @@
 <script lang="ts">
-	import { threeStore } from '$stores/threeStore';
 	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
+	import { linear } from 'svelte/easing';
 	import * as THREE from 'three';
-
-	import { setTransitionLoader } from '$lib/stores/transitionLoaderStore';
-
 	import { gsap } from 'gsap/dist/gsap';
 	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
+	import { setTransitionLoader } from '$lib/stores/transitionLoaderStore';
+	import { threeStore } from '$stores/threeStore';
+	import ProjectItem from '../lib/components/ProjectItem.svelte';
+
 	gsap.registerPlugin(ScrollTrigger);
 
-	import { get } from 'svelte/store';
-	import { linear } from 'svelte/easing';
-	import Link from '../lib/components/link.svelte';
-
 	let container: HTMLElement;
+	let fourthPage: HTMLElement;
+	let fourthtextContent: HTMLElement;
 
 	onMount(async () => {
 		setTransitionLoader(false);
@@ -67,6 +67,20 @@
 						duration: 1,
 						ease: linear
 					});
+
+					gsap.from(fourthtextContent, {
+						scrollTrigger: {
+							trigger: fourthPage,
+							start: 'top +10%',
+							end: 'bottom bottom',
+							scrub: true,
+							onEnter: () => console.log('Entrée dans la zone de .fourthPage'),
+							onLeave: () => console.log('Sortie de la zone de .fourthPage')
+						},
+						x: -100,
+						opacity: 0,
+						duration: 1
+					});
 				}, 1000);
 			});
 		}
@@ -108,59 +122,33 @@
 	</section>
 
 	<section class="thirdPage" aria-labelledby="thirdPageTitle">
-		<h1 id="thirdPageTitle">Explore more about my journey</h1>
+		<h1 id="thirdPageTitle">
+			If you want to look at this code go to : https://github.com/Pierre-FABIEN/RailEurope-HireMe
+		</h1>
 	</section>
 
-	<section class="fourthPage" aria-labelledby="fourthPageTitle">
-		<div class="textContent">
+	<section class="fourthPage" bind:this={fourthPage} aria-labelledby="fourthPageTitle">
+		<div class="textContent" bind:this={fourthtextContent}>
 			<h1 id="fourthPageTitle">My GitHub projects that will<br /> showcase my experience:</h1>
 			<ul>
-				<li>
-					<p>Ecommerce & SaaS boilerplate:</p>
-					<div class="linkContent">
-						<Link
-							iconType="git"
-							title="Github: Ecommerce & SaaS boilerplate"
-							link="https://github.com/Pierre-FABIEN/E-com_Sveltekit-0Auth-Vercel-MongoDB"
-						/>
-						<Link
-							iconType="live"
-							title="Live: Ecommerce & SaaS boilerplate"
-							link="https://e-com-sveltekit-0-auth-vercel-mongo-db.vercel.app/"
-						/>
-					</div>
-				</li>
-				<li>
-					<p>Technical Test Software Engineering:</p>
-					<div class="linkContent">
-						<Link
-							iconType="git"
-							title="Github: Technical Test Software Engineering"
-							link="https://github.com/Pierre-FABIEN/TEST"
-						/>
-						<Link
-							iconType="live"
-							title="Technical Test Software Engineering"
-							link="https://test-sveltekit.vercel.app/"
-						/>
-					</div>
-				</li>
-				<li>
-					<p>BoilerPlate SvelteKit GraphQL NodeJs and Playwright:</p>
-					<Link
-						iconType="git"
-						title="Github: BoilerPlate SvelteKit GraphQL NodeJs and Playwright"
-						link="https://github.com/Pierre-FABIEN/Sveltekit-GraphQL-NodeJS-MongoDB"
-					/>
-				</li>
-				<li>
-					<p>BoilerPlate SvelteKit APIRestful NodeJs and Playwright:</p>
-					<Link
-						iconType="git"
-						title="Github: BoilerPlate SvelteKit APIRestful NodeJs and Playwright"
-						link="https://github.com/Pierre-FABIEN/APIRestFul-Sveltekit-NodeJS-MongoDB"
-					/>
-				</li>
+				<ProjectItem
+					title="Ecommerce & SaaS boilerplate"
+					githubLink="https://github.com/Pierre-FABIEN/E-com_Sveltekit-0Auth-Vercel-MongoDB"
+					liveLink="https://e-com-sveltekit-0-auth-vercel-mongo-db.vercel.app/"
+				/>
+				<ProjectItem
+					title="Technical Test Software Engineering"
+					githubLink="https://github.com/Pierre-FABIEN/TEST"
+					liveLink="https://test-sveltekit.vercel.app/"
+				/>
+				<ProjectItem
+					title="BoilerPlate SvelteKit GraphQL NodeJs and Playwright"
+					githubLink="https://github.com/Pierre-FABIEN/Sveltekit-GraphQL-NodeJS-MongoDB"
+				/>
+				<ProjectItem
+					title="BoilerPlate SvelteKit APIRestful NodeJs and Playwright"
+					githubLink="https://github.com/Pierre-FABIEN/APIRestFul-Sveltekit-NodeJS-MongoDB"
+				/>
 			</ul>
 		</div>
 	</section>
@@ -199,6 +187,12 @@
 		font-size: xx-large;
 	}
 
+	.thirdPage {
+		h1 {
+			font-size: 0px !important;
+		}
+	}
+
 	.firstPage p,
 	.secondPage p {
 		width: 600px;
@@ -215,7 +209,6 @@
 
 	.fourthPage {
 		position: relative;
-
 		.textContent {
 			position: absolute;
 			left: 15vw;
@@ -225,37 +218,7 @@
 			ul {
 				padding: 0;
 				margin: 0;
-
-				li {
-					list-style: none;
-					border: 1px solid black;
-					border-radius: 5px;
-					margin-top: 5px;
-					margin-bottom: 5px;
-					padding: 5px;
-
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
-
-					p {
-						color: black; /* Vérifiez le contraste avec le fond */
-						font-weight: 400;
-					}
-
-					.linkContent {
-						display: flex;
-						justify-content: space-between;
-						align-items: center;
-					}
-				}
 			}
 		}
-	}
-
-	/* Styles de focus pour améliorer l'accessibilité */
-	.link-button:focus {
-		outline: 3px solid #eb0055; /* Couleur de l'outline pour le focus */
-		outline-offset: 2px;
 	}
 </style>

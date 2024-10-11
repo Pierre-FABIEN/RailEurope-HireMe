@@ -1,5 +1,5 @@
 <script>
-	import Link from '$components/Link.svelte';
+	import LinkBlank from '$components/LinkBlank.svelte';
 
 	export let title;
 	export let githubLink;
@@ -10,9 +10,9 @@
 <li>
 	<p>{title}</p>
 	<div class="linkContent">
-		<Link iconType="git" title={`Github: ${title}`} link={githubLink} />
+		<LinkBlank iconType="git" title={`Github: ${title}`} link={githubLink} />
 		{#if liveLink}
-			<Link iconType="live" title={liveTitle} link={liveLink} />
+			<LinkBlank iconType="live" title={liveTitle} link={liveLink} />
 		{/if}
 	</div>
 </li>

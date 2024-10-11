@@ -34,7 +34,7 @@
 		justify-content: space-between;
 		align-items: center;
 
-		//background: linear-gradient(to bottom right, #f72a75, #b20041);
+		background: white;
 
 		/* Ombre portée */
 		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);

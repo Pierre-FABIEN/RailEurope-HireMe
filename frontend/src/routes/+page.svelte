@@ -2,7 +2,6 @@
 	import { threeStore } from '$stores/threeStore';
 	import { onMount } from 'svelte';
 	import * as THREE from 'three';
-	import { tick } from 'svelte';
 
 	import { setTransitionLoader } from '$lib/stores/transitionLoaderStore';
 
@@ -13,24 +12,21 @@
 
 	import { get } from 'svelte/store';
 	import { linear } from 'svelte/easing';
+	import Link from '../lib/components/link.svelte';
 
 	let container: HTMLElement;
 
 	onMount(async () => {
-		await tick(); // Assurez-vous que le DOM est prêt
 		setTransitionLoader(false);
 
 		const { camera } = get(threeStore);
 
 		if (camera) {
-			// Position initiale de la caméra
 			camera.position.set(-10, 15, 0);
 			camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-			// Utiliser requestAnimationFrame pour s'assurer que le DOM est prêt
 			requestAnimationFrame(() => {
 				setTimeout(() => {
-					// Créer une timeline pour les animations de la caméra
 					const cameraTimeline = gsap.timeline({
 						scrollTrigger: {
 							trigger: container,
@@ -40,9 +36,6 @@
 						}
 					});
 
-					console.log('Timeline de la caméra créée:', cameraTimeline);
-
-					// Définir les positions de la caméra dans la timeline
 					cameraTimeline.to(camera.position, {
 						x: 0,
 						y: 15,
@@ -76,8 +69,6 @@
 					});
 				}, 1000);
 			});
-		} else {
-			console.error("La caméra n'est pas disponible.");
 		}
 	});
 </script>
@@ -88,9 +79,9 @@
 </svelte:head>
 
 <div class="home" bind:this={container}>
-	<div class="firstPage">
+	<section class="firstPage" aria-labelledby="firstPageTitle">
 		<div class="textContent">
-			<h1>After more than a year of <br /> hard work on sveltekit</h1>
+			<h1 id="firstPageTitle">After more than a year of <br /> hard work on SvelteKit</h1>
 			<p>
 				After all these tools crafted with Svelte to provide the finest browser experiences. After
 				all the research to adopt the best practices and technologies surrounding SvelteKit. After
@@ -102,10 +93,10 @@
 				Europe has announced a position for a Frontend Engineer specializing in SvelteKit!
 			</p>
 		</div>
-	</div>
+	</section>
 
-	<div class="secondPage">
-		<h1>It's time to take my<br /> place on this train</h1>
+	<section class="secondPage" aria-labelledby="secondPageTitle">
+		<h1 id="secondPageTitle">It's time to take my<br /> place on this train</h1>
 		<p>
 			I hold all the passports in hand: WCAG, a11y, and a solid background in React. I bring with me
 			the ability to tackle complex problems, along with an unwavering passion for learning and
@@ -114,41 +105,65 @@
 			learn myself. With experience in both aesthetic and technical fields, I’m requesting a ticket
 			on this train to embark on a new adventure.
 		</p>
-	</div>
+	</section>
 
-	<div class="thirdPage"></div>
+	<section class="thirdPage" aria-labelledby="thirdPageTitle">
+		<h1 id="thirdPageTitle">Explore more about my journey</h1>
+	</section>
 
-	<div class="fourthPage">
+	<section class="fourthPage" aria-labelledby="fourthPageTitle">
 		<div class="textContent">
-			<h1>My GitHub projects that will<br /> showcase my experience:</h1>
+			<h1 id="fourthPageTitle">My GitHub projects that will<br /> showcase my experience:</h1>
 			<ul>
 				<li>
-					<p>
-						Ecommerce & SaaS boilerplate:
-						<!-- svelte 4, Sveltekit, Tailwind, Shadcn, Superform, Zod,
-						Prisma, Vercel, MongoDB, Cloundinary, 0Auth, Stripe, PWA, ThreeJs, Sitemap, ... -->
-					</p>
-					<a href="https://github.com/Pierre-FABIEN/E-com_Sveltekit-0Auth-Vercel-MongoDB">Link</a>
+					<p>Ecommerce & SaaS boilerplate:</p>
+					<div class="linkContent">
+						<Link
+							iconType="git"
+							title="Github: Ecommerce & SaaS boilerplate"
+							link="https://github.com/Pierre-FABIEN/E-com_Sveltekit-0Auth-Vercel-MongoDB"
+						/>
+						<Link
+							iconType="live"
+							title="Live: Ecommerce & SaaS boilerplate"
+							link="https://e-com-sveltekit-0-auth-vercel-mongo-db.vercel.app/"
+						/>
+					</div>
 				</li>
 				<li>
-					<p>
-						Technical Test Sofware Engineering:
-						<!-- Svelte 5, Sveltekit, Tailwind, Shadcn, Superform,
-						Zod, Prisma, Vercel, MongoDB -->
-					</p>
-					<a href="https://github.com/Pierre-FABIEN/TEST">Link</a>
+					<p>Technical Test Software Engineering:</p>
+					<div class="linkContent">
+						<Link
+							iconType="git"
+							title="Github: Technical Test Software Engineering"
+							link="https://github.com/Pierre-FABIEN/TEST"
+						/>
+						<Link
+							iconType="live"
+							title="Technical Test Software Engineering"
+							link="https://test-sveltekit.vercel.app/"
+						/>
+					</div>
 				</li>
 				<li>
-					<p>BoilerPlate sveltekit GraphQL NodeJs and Playwright</p>
-					<a href="https://github.com/Pierre-FABIEN/Sveltekit-GraphQL-NodeJS-MongoDB">Link</a>
+					<p>BoilerPlate SvelteKit GraphQL NodeJs and Playwright:</p>
+					<Link
+						iconType="git"
+						title="Github: BoilerPlate SvelteKit GraphQL NodeJs and Playwright"
+						link="https://github.com/Pierre-FABIEN/Sveltekit-GraphQL-NodeJS-MongoDB"
+					/>
 				</li>
 				<li>
-					<p>BoilerPlate sveltekit APIRestful NodeJs and Playwright</p>
-					<a href="https://github.com/Pierre-FABIEN/APIRestFul-Sveltekit-NodeJS-MongoDB">Link</a>
+					<p>BoilerPlate SvelteKit APIRestful NodeJs and Playwright:</p>
+					<Link
+						iconType="git"
+						title="Github: BoilerPlate SvelteKit APIRestful NodeJs and Playwright"
+						link="https://github.com/Pierre-FABIEN/APIRestFul-Sveltekit-NodeJS-MongoDB"
+					/>
 				</li>
 			</ul>
 		</div>
-	</div>
+	</section>
 </div>
 
 <style lang="scss">
@@ -161,7 +176,6 @@
 		position: absolute;
 	}
 
-	// Pages layout
 	.firstPage,
 	.secondPage,
 	.thirdPage,
@@ -174,43 +188,31 @@
 		flex-direction: column;
 	}
 
-	// Global text styling
 	h1,
 	p {
-		color: #eb0055;
+		color: #eb0055; /* Assurez-vous que ce contraste est suffisant avec l'arrière-plan */
 		font-family: 'Georama', sans-serif;
 		font-weight: 700;
 	}
 
-	// Heading styling
 	h1 {
 		font-size: xx-large;
 	}
 
-	// Page-specific content
-	.firstPage {
-		p {
-			width: 600px;
-			font-weight: 200;
-			text-align: justify;
-			color: white;
-			font-size: 16px;
-			line-height: 150%;
-		}
+	.firstPage p,
+	.secondPage p {
+		width: 600px;
+		font-weight: 200;
+		text-align: justify;
+		color: white; /* Vérifiez le contraste avec le fond */
+		font-size: 16px;
+		line-height: 150%;
 	}
 
-	.secondPage {
-		p {
-			width: 300px;
-			font-weight: 200;
-			text-align: justify;
-			color: white;
-			font-size: 16px;
-			line-height: 150%;
-		}
+	.secondPage p {
+		width: 300px;
 	}
 
-	// Fourth page styling
 	.fourthPage {
 		position: relative;
 
@@ -234,21 +236,26 @@
 
 					display: flex;
 					justify-content: space-between;
-					align-content: center;
-					align-self: center;
+					align-items: center;
 
 					p {
-						color: black;
+						color: black; /* Vérifiez le contraste avec le fond */
 						font-weight: 400;
 					}
 
-					a {
+					.linkContent {
 						display: flex;
-						align-content: center;
-						align-self: center;
+						justify-content: space-between;
+						align-items: center;
 					}
 				}
 			}
 		}
+	}
+
+	/* Styles de focus pour améliorer l'accessibilité */
+	.link-button:focus {
+		outline: 3px solid #eb0055; /* Couleur de l'outline pour le focus */
+		outline-offset: 2px;
 	}
 </style>

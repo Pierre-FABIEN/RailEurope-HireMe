@@ -82,4 +82,12 @@
 		position: relative;
 		overflow: hidden; //cursor: none;
 	}
+
+	.scrollbar-thumb {
+		background: #eb0055 !important;
+	}
+
+	.scrollbar-track {
+		background: transparent !important;
+	}
 </style>

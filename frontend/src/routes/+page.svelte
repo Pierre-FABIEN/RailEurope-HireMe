@@ -8,7 +8,7 @@
 
 	import { setTransitionLoader } from '$lib/stores/transitionLoaderStore';
 	import { threeStore } from '$stores/threeStore';
-	import ProjectItem from '../lib/components/ProjectItem.svelte';
+	import Item from '../lib/components/Item.svelte';
 
 	gsap.registerPlugin(ScrollTrigger);
 
@@ -131,21 +131,21 @@
 		<div class="textContent" bind:this={fourthtextContent}>
 			<h1 id="fourthPageTitle">My GitHub projects that will<br /> showcase my experience:</h1>
 			<ul>
-				<ProjectItem
+				<Item
 					title="Ecommerce & SaaS boilerplate"
 					githubLink="https://github.com/Pierre-FABIEN/E-com_Sveltekit-0Auth-Vercel-MongoDB"
 					liveLink="https://e-com-sveltekit-0-auth-vercel-mongo-db.vercel.app/"
 				/>
-				<ProjectItem
+				<Item
 					title="Technical Test Software Engineering"
 					githubLink="https://github.com/Pierre-FABIEN/TEST"
 					liveLink="https://test-sveltekit.vercel.app/"
 				/>
-				<ProjectItem
+				<Item
 					title="BoilerPlate SvelteKit GraphQL NodeJs and Playwright"
 					githubLink="https://github.com/Pierre-FABIEN/Sveltekit-GraphQL-NodeJS-MongoDB"
 				/>
-				<ProjectItem
+				<Item
 					title="BoilerPlate SvelteKit APIRestful NodeJs and Playwright"
 					githubLink="https://github.com/Pierre-FABIEN/APIRestFul-Sveltekit-NodeJS-MongoDB"
 				/>

@@ -119,31 +119,35 @@
 	<div class="thirdPage"></div>
 
 	<div class="fourthPage">
-		<h1>My GitHub projects that will<br /> showcase my experience:</h1>
-		<ul>
-			<li>
-				<p>
-					Ecommerce & SaaS boilerplate: svelte 4, Sveltekit, Tailwind, Shadcn, Superform, Zod,
-					Prisma, Vercel, MongoDB, Cloundinary, 0Auth, Stripe, PWA, ThreeJs, Sitemap, ...
-				</p>
-				<a href="https://github.com/Pierre-FABIEN/E-com_Sveltekit-0Auth-Vercel-MongoDB">Link</a>
-			</li>
-			<li>
-				<p>
-					Technical Test Sofware Engineering: Svelte 5, Sveltekit, Tailwind, Shadcn, Superform, Zod,
-					Prisma, Vercel, MongoDB
-				</p>
-				<a href="https://github.com/Pierre-FABIEN/TEST">Link</a>
-			</li>
-			<li>
-				<p>BoilerPlate sveltekit GraphQL NodeJs and mongoDB Playwright</p>
-				<a href="https://github.com/Pierre-FABIEN/Sveltekit-GraphQL-NodeJS-MongoDB">Link</a>
-			</li>
-			<li>
-				<p>BoilerPlate sveltekit APIRestful NodeJs and mongoDB Playwright</p>
-				<a href="https://github.com/Pierre-FABIEN/APIRestFul-Sveltekit-NodeJS-MongoDB">Link</a>
-			</li>
-		</ul>
+		<div class="textContent">
+			<h1>My GitHub projects that will<br /> showcase my experience:</h1>
+			<ul>
+				<li>
+					<p>
+						Ecommerce & SaaS boilerplate:
+						<!-- svelte 4, Sveltekit, Tailwind, Shadcn, Superform, Zod,
+						Prisma, Vercel, MongoDB, Cloundinary, 0Auth, Stripe, PWA, ThreeJs, Sitemap, ... -->
+					</p>
+					<a href="https://github.com/Pierre-FABIEN/E-com_Sveltekit-0Auth-Vercel-MongoDB">Link</a>
+				</li>
+				<li>
+					<p>
+						Technical Test Sofware Engineering:
+						<!-- Svelte 5, Sveltekit, Tailwind, Shadcn, Superform,
+						Zod, Prisma, Vercel, MongoDB -->
+					</p>
+					<a href="https://github.com/Pierre-FABIEN/TEST">Link</a>
+				</li>
+				<li>
+					<p>BoilerPlate sveltekit GraphQL NodeJs and Playwright</p>
+					<a href="https://github.com/Pierre-FABIEN/Sveltekit-GraphQL-NodeJS-MongoDB">Link</a>
+				</li>
+				<li>
+					<p>BoilerPlate sveltekit APIRestful NodeJs and Playwright</p>
+					<a href="https://github.com/Pierre-FABIEN/APIRestFul-Sveltekit-NodeJS-MongoDB">Link</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>
 
@@ -157,32 +161,33 @@
 		position: absolute;
 	}
 
+	// Pages layout
 	.firstPage,
 	.secondPage,
 	.thirdPage,
 	.fourthPage {
 		width: 100%;
 		height: 100vh;
-
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
 	}
 
+	// Global text styling
 	h1,
 	p {
 		color: #eb0055;
+		font-family: 'Georama', sans-serif;
+		font-weight: 700;
 	}
 
+	// Heading styling
 	h1 {
 		font-size: xx-large;
 	}
 
-	.fourthPage > h1 {
-		margin-right: 45vw;
-	}
-
+	// Page-specific content
 	.firstPage {
 		p {
 			width: 600px;
@@ -205,9 +210,45 @@
 		}
 	}
 
-	h1,
-	p {
-		font-family: 'Georama', sans-serif;
-		font-weight: 700;
+	// Fourth page styling
+	.fourthPage {
+		position: relative;
+
+		.textContent {
+			position: absolute;
+			left: 15vw;
+			top: 5vh;
+			width: 500px;
+
+			ul {
+				padding: 0;
+				margin: 0;
+
+				li {
+					list-style: none;
+					border: 1px solid black;
+					border-radius: 5px;
+					margin-top: 5px;
+					margin-bottom: 5px;
+					padding: 5px;
+
+					display: flex;
+					justify-content: space-between;
+					align-content: center;
+					align-self: center;
+
+					p {
+						color: black;
+						font-weight: 400;
+					}
+
+					a {
+						display: flex;
+						align-content: center;
+						align-self: center;
+					}
+				}
+			}
+		}
 	}
 </style>

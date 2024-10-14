@@ -29,14 +29,11 @@
 
 				if (container && !container.firstChild) {
 					scene = new THREE.Scene();
+					scene.autoUpdate = false;
 
 					renderer = new THREE.WebGLRenderer({ antialias: true });
 					renderer.setSize(window.innerWidth, window.innerHeight);
-					renderer.setPixelRatio(window.devicePixelRatio * devicePixelRatio);
-					renderer.shadowMap.enabled = true;
-					renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-					container.appendChild(renderer.domElement);
-
+					renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 					container.appendChild(renderer.domElement);
 
 					// Camera setup (only if camera is not already set up)
@@ -106,10 +103,8 @@
 			'modeles/train.glb',
 			(gltf: any) => {
 				gltf.scene.traverse((node: any) => {
-					if (node.isMesh) {
-						node.castShadow = true;
-						node.receiveShadow = true;
-						node.geometry.computeVertexNormals();
+					if (node instanceof THREE.Mesh) {
+						node.frustumCulled = true;
 					}
 				});
 				scene.add(gltf.scene);

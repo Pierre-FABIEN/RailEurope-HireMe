@@ -36,7 +36,7 @@
 	{@html icon}
 </a>
 
-<style>
+<style lang="scss" global>
 	.link-button {
 		display: flex;
 		justify-content: center;
@@ -71,5 +71,11 @@
 		padding: 0;
 		clip: rect(0, 0, 0, 0);
 		border: 0;
+	}
+
+	.link-button {
+		path {
+			stroke: #eb0055 !important;
+		}
 	}
 </style>

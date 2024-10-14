@@ -164,6 +164,13 @@
 		position: absolute;
 	}
 
+	.textContent {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+
 	.firstPage,
 	.secondPage,
 	.thirdPage,
@@ -196,6 +203,7 @@
 	.firstPage p,
 	.secondPage p {
 		width: 600px;
+		max-width: 80vw;
 		font-weight: 200;
 		text-align: justify;
 		color: white; /* Vérifiez le contraste avec le fond */
@@ -214,10 +222,18 @@
 			left: 15vw;
 			top: 5vh;
 			width: 500px;
+			max-width: 80vw;
 
 			ul {
 				padding: 0;
 				margin: 0;
+			}
+		}
+
+		@media (max-width: 768px) {
+			.textContent {
+				left: auto; // Enlève la position left
+				top: auto; // Enlève la position top
 			}
 		}
 	}
